@@ -1,0 +1,56 @@
+<div class="jumbotron">
+    <div class="container">
+	      <a [routerLink]="['']" class="pull-left">Go Back</a>
+           <div class="col-sm-8 col-sm-offset-2">
+		   <div class="alert alert-dismissable fade in" [ngClass]="(alertsate === true)?'alert-success':'alert-danger'" [hidden]="Vmessage">
+                <a [routerLink]="['']" class="close" (click)="Vmessage = true" data-dismiss="alert" aria-label="close">&times;</a> {{ message }}
+            </div>
+                 <h1>NEW USER</h1>
+			     <form (ngSubmit)="registeruser(userInput.value, passInput.value)" #f="ngForm">
+            
+			        
+                    <div class="form-group">
+                         <label for="uname">Email:</label>
+                         <input type="email" class="form-control" [(ngModel)]="Mname" id="uname" name="email" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #userInput="ngModel" placeholder="username" required>
+                       <div *ngIf="!inputmail">
+                               email must be at contain '@' symbol.
+                             </div>
+						 <div *ngIf="userInput.invalid && (userInput.dirty || userInput.touched)" class="alert alert-danger">
+
+                              <div *ngIf="userInput.errors.required">
+                                 Email is required.
+                              </div>
+							  <div *ngIf="userInput.errors.pattern">
+                                 Plesae include	an '@' in the email address ex: 'xx@xx.com'.
+                              </div>
+
+							  
+                               
+                         </div>
+                    </div>
+					<div>{{ result }}</div>
+                     
+					<div class="form-group">
+                         <label for="uname">Password:</label>
+                         <input type="password" class="form-control" [(ngModel)]="Mpassword" id="pwd" #passInput="ngModel" name="pwd" placeholder="password" minlength="8" required>
+                         <div *ngIf="passInput.invalid && (passInput.dirty || passInput.touched)" class="alert alert-danger">
+
+                              <div *ngIf="passInput.errors.required">
+                               Password is required.
+                             </div>
+                             <div *ngIf="passInput.errors.minlength">
+                               Name must be at least 8 characters long.
+                             </div>
+                         </div>
+                     </div>
+					 
+
+
+                     <button [disabled]="f.invalid" type="submit" class="btn btn-primary">Submit</button>
+             </form>
+           
+          </div>
+    </div>
+</div>
+
+

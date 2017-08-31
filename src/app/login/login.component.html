@@ -1,0 +1,46 @@
+<div class="jumbotron">
+    <div class="container">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="alert alert-dismissable fade in" [ngClass]="(alertsate === true)?'alert-success':'alert-danger'" [hidden]="Vmessage">
+                <a href="#" class="close" (click)="Vmessage = true" data-dismiss="alert" aria-label="close">&times;</a> {{ message }}
+            </div>
+            <h1>Login Form</h1>
+            <form #myForm="ngForm">
+                <div class="form-group">
+                    <label for="uname">Email:</label>
+                    <input type="email" class="form-control" [(ngModel)]="Mname" id="uname" name="uname" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" #userInput="ngModel" placeholder="username" required>
+                    <div *ngIf="userInput.invalid && (userInput.dirty || userInput.touched)" class="alert alert-danger">
+
+                              <div *ngIf="userInput.errors.required">
+                                 Email is required.
+                              </div>
+							   <div *ngIf="userInput.errors.pattern">
+                                 Plesae include	an '@' in the email address ex: 'xx@xx.com'.
+                              </div>
+                               
+                         </div>
+                </div>
+                <div class="form-group">
+                    <label for="uname">password:</label>
+                    <input type="password" class="form-control" [(ngModel)]="Mpassword" id="pwd" #passInput="ngModel" name="pwd" minlength="8" placeholder="password" required>
+                   <div *ngIf="passInput.invalid && (passInput.dirty || passInput.touched)" class="alert alert-danger">
+
+                              <div *ngIf="passInput.errors.required">
+                               Password is required.
+                             </div>
+                             <div *ngIf="passInput.errors.minlength">
+                               Name must be at least 8 characters long.
+                             </div>
+                         </div>
+                </div>
+
+
+                <button [disabled]="myForm.invalid "type="submit" class="btn btn-primary"  (click)="login(userInput.value, passInput.value)">Login</button>
+				<button type="submit" class="btn btn-primary"  (click)="register()">Register</button><br><br>
+				
+                <button class="btn btn-default" (click)="Googlelogin()">Login with Google</button>
+				<button class="btn btn-default" (click)="Facebooklogin()">Login with Facebook</button>
+            </form>
+        </div>
+    </div>
+</div>
